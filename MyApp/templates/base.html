@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gopika TP | Portfolio</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="{% static 'js/script.js' %}" defer></script>
+</head>
+{% block content %}
+<body class="dark-mode">
+    
+    <header class="p-5 flex justify-between items-center bg-gray-800 shadow-md">
+        <h1 class="text-3xl font-bold">Gopika TP</h1>
+        
+        <nav>
+            <ul class="flex gap-10 text-[20px]">
+                <li><a href="{% url 'index' %}" class="hover:text-gray-400">Home</a></li>
+                <li><a href="{% url 'about' %}" class="hover:text-gray-400">About</a></li>
+                <li><a href="{% url 'projects' %}" class="hover:text-gray-400">Projects</a></li>
+                <li><a href="{% url 'contact' %}" class="hover:text-gray-400">Contact</a></li>
+            </ul>
+        </nav>
+        <button id="theme-toggle" class="button">Toggle Theme</button>
+    </header>
+
+    <main class="container mx-auto px-6 py-10">
+ 
+    </main>
+
+    <footer class="bg-gray-800 text-center p-4 mt-10">
+        <p>&copy; 2025 Gopika TP. All rights reserved.</p>
+    </footer>
+</body>
+{% endblock %}
+</html>

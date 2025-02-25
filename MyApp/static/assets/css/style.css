@@ -1,0 +1,95 @@
+*{
+    margin:0;
+    padding:0;
+    font-family:'Poppins',sans-serif;
+    box-sizing: border-box;
+}
+#header{
+    width: 100%;
+    height:100vh;
+    /* background-image: url(images); */
+}
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    transition: background 0.3s, color 0.3s;
+}
+.light-mode {
+    background: #f4f4f4;
+    color: #333;
+}
+.dark-mode {
+    background: #111;
+    color: white;
+}
+
+/* Header Styling */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Button Styling */
+.button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    background: #007bff;
+    color: white;
+    transition: 0.3s;
+}
+.button:hover {
+    background: #0056b3;
+}
+
+/* Typing Animation */
+.typing {
+    border-right: 3px solid white;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 2rem;
+    width: 0;
+    animation: typing 3s steps(40, end) forwards, blink 0.75s step-end infinite;
+}
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+@keyframes blink {
+    from, to { border-color: transparent }
+    50% { border-color: white; }
+}
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+.timeline-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.timeline-dot {
+    width: 20px;
+    height: 20px;
+    background: #007bff;
+    border-radius: 50%;
+    position: absolute;
+    left: -10px;
+    top: 10px;
+}
+
+.timeline-content {
+    background: #1a1a1a;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    margin-left: 30px;
+    color: white;
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal portfolio</title>
+    <link rel="stylesheet" href="/MyApp/assets/css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white">
+    {% block content %}
+    <header class="p-5 flex justify-between items-center">
+        <h1 class="text-3xl font-bold">Gopika TP</h1>
+<nav>
+    <ul class="flex gap-14 text-[20px]">
+        <li><a href="{% url 'index' %}" class="hover:text-gray-400">Home</a></li>
+        <li><a href="{% url 'about' %}" class="hover:text-gray-400">About</a></li>
+        <li><a href="{% url 'projects' %}" class="hover:text-gray-400">Projects</a></li>
+        <li><a href="{% url 'contact' %}" class="hover:text-gray-400">Contact</a></li>
+    </ul>
+</nav>
+
+    </header>
+    <main class="flex flex-col items-center mt-10">
+        <h2 class="text-4xl font-semibold">Exploring, Adapting, and Creating Beyond Limits.</h2>
+        <p class="mt-4 text-lg text-gray-300">I'm a Full-Stack Developer skilled in Python Django & React.</p>
+    </main>
+
+
+   {% endblock %} 
+</body>
+</html>
