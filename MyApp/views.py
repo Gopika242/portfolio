@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from django.core.mail import send_mail
+from django.shortcuts import render, redirect
+from django.contrib import messages
 
 # Create your views here.
 def index(re):
@@ -16,9 +19,25 @@ def about(request):
 
     return render(request, "about.html", {"skills": skills, "internships": internships})
 
+def contact(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
 
-def contact(re):
-    return render(re,'contact.html')
+        # Send email
+        send_mail(
+            subject=f"New Contact Message from {name}",
+            message=f"Email: {email}\n\nMessage:\n{message}",
+            from_email=email,  
+            recipient_list=['gopikatp712@gmail.com'],
+            fail_silently=False,
+        )
+        messages.success(request, "Your message has been sent successfully!")
+        return redirect('contact')  # Redirect to the contact page
+
+    return render(request, 'contact.html')
+
 
 def projects(re):
     return render(re,'projects.html')

@@ -1,33 +1,153 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 {% load static %}
+
+{% block content %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal portfolio</title>
-    <link rel="stylesheet" href="/MyApp/assets/css/style.css">
+    <title>Personal Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <style>
+        @keyframes glow {
+            0% { box-shadow: 0 0 10px rgba(59, 130, 246, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.8); }
+            100% { box-shadow: 0 0 10px rgba(59, 130, 246, 0.5); }
+        }
+    </style>
 </head>
 <body class="bg-gray-900 text-white">
-    {% block content %}
-    <header class="p-5 flex justify-between items-center">
+    <canvas id="background-canvas"></canvas>
+
+    <header class="p-5 flex justify-between items-center max-w-7xl mx-auto">
         <h1 class="text-3xl font-bold">Gopika TP</h1>
-<nav>
-    <ul class="flex gap-14 text-[20px]">
-        <li><a href="{% url 'index' %}" class="hover:text-gray-400">Home</a></li>
-        <li><a href="{% url 'about' %}" class="hover:text-gray-400">About</a></li>
-        <li><a href="{% url 'projects' %}" class="hover:text-gray-400">Projects</a></li>
-        <li><a href="{% url 'contact' %}" class="hover:text-gray-400">Contact</a></li>
-    </ul>
-</nav>
-
+        <nav>
+            <ul class="flex gap-10 text-lg">
+                <li><a href="{% url 'index' %}" class="hover:text-gray-400 text-blue-400">Home</a></li>
+                <li><a href="{% url 'about' %}" class="hover:text-gray-400">About</a></li>
+                <li><a href="{% url 'projects' %}" class="hover:text-gray-400">Projects</a></li>
+                <li><a href="{% url 'contact' %}" class="hover:text-gray-400">Contact</a></li>
+            </ul>
+        </nav>
     </header>
-    <main class="flex flex-col items-center mt-10">
-        <h2 class="text-4xl font-semibold">Exploring, Adapting, and Creating Beyond Limits.</h2>
-        <p class="mt-4 text-lg text-gray-300">I'm a Full-Stack Developer skilled in Python Django & React.</p>
+
+    <!-- Hero Section -->
+    <main class="flex flex-col lg:flex-row items-center justify-between max-w-7xl mx-auto px-6 lg:px-16 min-h-screen gap-10">
+        <!-- Left Section: Text and Resume -->
+        <div class="lg:w-1/2 text-center lg:text-left max-w-[600px]">
+            <h3 class="text-4xl font-extrabold leading-tight">Hey, I am Gopika T.P,<br> a Web Developer</h3>
+            <p class="mt-6 text-gray-400 text-lg">
+                I am a Junior Developer Trainee at Neurocode International Pvt. Ltd., specializing in 
+                Python development and building REST APIs using Django. Currently, I am expanding my 
+                skills in React to become a proficient full-stack developer.
+            </p>
+
+            <!-- View Resume Button -->
+            <div class="mt-10">
+                <a href="{% static 'assets/Gopika.TP.-RESUME-1.pdf' %}" target="_blank" 
+                   class="px-6 py-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition">
+                    View Resume
+                </a>
+            </div>
+
+            <!-- Contact Buttons -->
+            <div class="mt-8 flex justify-center lg:justify-start gap-6">
+                <a href="https://www.linkedin.com/in/gopikatp/" target="_blank"
+                   class="p-3 bg-gray-800 text-white rounded-full shadow-md hover:bg-gray-700 transition">
+                    <i class="fab fa-linkedin text-2xl"></i>
+                </a>
+                <a href="https://github.com/Gopika242" target="_blank"
+                   class="p-3 bg-gray-800 text-white rounded-full shadow-md hover:bg-gray-700 transition">
+                    <i class="fab fa-github text-2xl"></i>
+                </a>
+                <a href="mailto:gopikatp712@gmail.com"
+                   class="p-3 bg-gray-800 text-white rounded-full shadow-md hover:bg-gray-700 transition">
+                    <i class="fas fa-envelope text-2xl"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Right Section: Profile Image -->
+        <div class="lg:w-1/2 flex justify-center flex-grow">
+            <div class="w-80 h-80 rounded-full border-4 border-blue-400 flex items-center justify-center animate-glow" 
+                 style="animation: glow 2s infinite alternate;">
+                <img src="{% static 'assets/images/me.jpg' %}" alt="Gopika TP" 
+                     class="w-full h-full rounded-full object-cover">
+            </div>
+        </div>
     </main>
+<!-- ✅ Load Script -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+const canvas = document.getElementById("background-canvas");
+if (!canvas) {
+    console.error("Canvas not found!");
+    return;
+}
 
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-   {% endblock %} 
+let lines = [];
+const numLines = 20;
+
+function createLine() {
+    return {
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        length: Math.random() * 200 + 100,
+        angle: Math.random() * Math.PI * 2,
+        speed: Math.random() * 1 + 0.5
+    };
+}
+
+function drawLines() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = "rgba(52, 152, 219, 0.8)";  // Neon blue color
+    ctx.lineWidth = 2;
+
+    lines.forEach(line => {
+        ctx.beginPath();
+        ctx.moveTo(line.x, line.y);
+        ctx.lineTo(
+            line.x + Math.cos(line.angle) * line.length,
+            line.y + Math.sin(line.angle) * line.length
+        );
+        ctx.stroke();
+    });
+}
+
+function animateLines() {
+    lines.forEach(line => {
+        line.x += Math.cos(line.angle) * line.speed;
+        line.y += Math.sin(line.angle) * line.speed;
+
+        // Reset if out of bounds
+        if (line.x > canvas.width || line.x < 0 || line.y > canvas.height || line.y < 0) {
+            Object.assign(line, createLine());
+        }
+    });
+
+    drawLines();
+    requestAnimationFrame(animateLines);
+}
+
+function init() {
+    lines = Array.from({ length: numLines }, createLine);
+    animateLines();
+}
+
+window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    init();
+});
+
+init();
+});
+
+</script>
+<script src="{% static 'assets/js/script.js' %}"></script>
 </body>
-</html>
+{% endblock %}

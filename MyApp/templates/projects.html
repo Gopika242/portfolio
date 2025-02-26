@@ -2,26 +2,170 @@
 {% load static %}
 
 {% block content %}
-<div class="max-w-5xl mx-auto py-16">
+<style>
+    canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -1;
+    }
+
+    body {
+        background: linear-gradient(135deg, #0f172a, #1e293b);
+        animation: gradientAnimation 6s infinite alternate;
+    }
+
+    @keyframes gradientAnimation {
+        0% { background: linear-gradient(135deg, #0f172a, #1e293b); }
+        100% { background: linear-gradient(135deg, #1e293b, #334155); }
+    }
+
+    .tilt-card {
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        overflow: hidden;
+    }
+
+    .tilt-card:hover {
+        transform: translateY(-5px) rotateX(5deg) rotateY(5deg);
+        box-shadow: 0 10px 20px rgba(59, 130, 246, 0.5);
+    }
+
+    .tilt-card img {
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .tilt-card:hover img {
+        transform: scale(1.05);
+    }
+</style>
+
+<!-- ✅ Only Circle Animation -->
+<canvas id="animatedBackground"></canvas>
+<canvas id="background-canvas"></canvas>
+
+<div class="max-w-6xl mx-auto py-16">
+    <div class="mb-2">
+        <nav class="text-center">
+            <ul class="flex justify-center gap-14 text-[20px]">
+                <li><a href="{% url 'index' %}" class="hover:text-gray-400">Home</a></li>
+                <li><a href="{% url 'about' %}" class="hover:text-gray-400">About</a></li>
+                <li><a href="{% url 'projects' %}" class="hover:text-gray-400 text-blue-400">Projects</a></li>
+                <li><a href="{% url 'contact' %}" class="hover:text-gray-400">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+
     <h2 class="text-4xl font-bold text-center">Projects</h2>
     <p class="mt-4 text-lg text-gray-300 text-center">Here are some of my recent projects.</p>
 
-    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
-        <!-- Project 1 -->
-        <div class="bg-gray-800 p-6 rounded-lg shadow-md">
-            <h3 class="text-2xl font-semibold">MyHealthCompass</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10 items-center">
+        <div class="bg-gray-800 p-6 rounded-lg shadow-md tilt-card">
+            <img src="{% static 'assets/images/BVRSwYm65mVqo2ypR7sUhS6fPnBt683V.jpg' %}" alt="" class="h-[50%] w-[100%] rounded-md">
+            <h3 class="text-2xl font-semibold mt-2">MyHealthCompass</h3>
             <p class="mt-2 text-gray-300">A health and fitness platform with BMI calculator, personalized exercise routines, and an e-commerce shop.</p>
             <p class="mt-2 text-sm text-gray-400"><strong>Tech Stack:</strong> Django, React, Tailwind CSS, SQLite</p>
             <a href="https://github.com/Gopika242/MyHealthCompass" target="_blank" class="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">View on GitHub</a>
         </div>
 
-        <!-- Project 2 -->
-        <div class="bg-gray-800 p-6 rounded-lg shadow-md">
-            <h3 class="text-2xl font-semibold">Furniture E-commerce Platform</h3>
+        <div class="bg-gray-800 p-6 rounded-lg shadow-md tilt-card">
+            <img src="{% static 'assets/images/furniture.webp' %}" alt="" class="h-[50%] w-[100%] rounded-md">
+            <h3 class="text-2xl font-semibold mt-2">Furniture E-commerce Platform</h3>
             <p class="mt-2 text-gray-300">An e-commerce platform for selling furniture with user authentication and secure checkout.</p>
-            <p class="mt-2 text-sm text-gray-400"><strong>Tech Stack:</strong> Django, Bootstrap, JavaScript, SQLite</p>
+            <p class="mt-2 text-sm text-gray-400"><strong>Tech Stack:</strong> HTML, CSS, JavaScript, Tailwind, Bootstrap, APIs</p>
             <a href="https://github.com/Gopika242/FurnitureEcom" target="_blank" class="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">View on GitHub</a>
+        </div>
+
+        <div class="bg-gray-800 p-6 rounded-lg shadow-md tilt-card">
+            <img src="{% static 'assets/images/restoran.jpg' %}" alt="" class="h-[50%] w-[100%] rounded-md">
+            <h3 class="text-2xl font-semibold mt-2">Restoran</h3>
+            <p class="mt-2 text-gray-300">A web-based restaurant management platform where users can browse dishes, place orders, and enjoy seamless dining experiences.</p>
+            <p class="mt-2 text-sm text-gray-400"><strong>Tech Stack:</strong> Python, Django, HTML, CSS, Bootstrap, SQLite</p>
+            <a href="https://github.com/Gopika242/Restoran" target="_blank" class="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">View on GitHub</a>
+        </div>
+
+        <div class="bg-gray-800 p-6 rounded-lg shadow-md tilt-card">
+            <img src="{% static 'assets/images/tripster.jpg' %}" alt="" class="h-[50%] w-[100%] rounded-md">
+            <h3 class="text-2xl font-semibold mt-2">Tripster</h3>
+            <p class="mt-2 text-gray-300">A travel agency website designed with HTML and CSS, allowing users to explore destinations and view tour packages.</p>
+            <p class="mt-2 text-sm text-gray-400"><strong>Tech Stack:</strong> HTML, CSS, Bootstrap</p>
+            <a href="https://github.com/Gopika242/Tripster" target="_blank" class="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">View on GitHub</a>
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+const canvas = document.getElementById("background-canvas");
+if (!canvas) {
+    console.error("Canvas not found!");
+    return;
+}
+
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let lines = [];
+const numLines = 20;
+
+function createLine() {
+    return {
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        length: Math.random() * 200 + 100,
+        angle: Math.random() * Math.PI * 2,
+        speed: Math.random() * 1 + 0.5
+    };
+}
+
+function drawLines() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = "rgba(52, 152, 219, 0.8)";  // Neon blue color
+    ctx.lineWidth = 2;
+
+    lines.forEach(line => {
+        ctx.beginPath();
+        ctx.moveTo(line.x, line.y);
+        ctx.lineTo(
+            line.x + Math.cos(line.angle) * line.length,
+            line.y + Math.sin(line.angle) * line.length
+        );
+        ctx.stroke();
+    });
+}
+
+function animateLines() {
+    lines.forEach(line => {
+        line.x += Math.cos(line.angle) * line.speed;
+        line.y += Math.sin(line.angle) * line.speed;
+
+        // Reset if out of bounds
+        if (line.x > canvas.width || line.x < 0 || line.y > canvas.height || line.y < 0) {
+            Object.assign(line, createLine());
+        }
+    });
+
+    drawLines();
+    requestAnimationFrame(animateLines);
+}
+
+function init() {
+    lines = Array.from({ length: numLines }, createLine);
+    animateLines();
+}
+
+window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    init();
+});
+
+init();
+});
+
+</script>
+<script src="https://unpkg.com/scrollreveal"></script>
+<script src="{% static 'assets/js/script.js' %}" defer></script>
+
 {% endblock %}

@@ -1,3 +1,4 @@
+
 *{
     margin:0;
     padding:0;
@@ -83,6 +84,16 @@ header {
     left: -10px;
     top: 10px;
 }
+#background-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; /* Ensures it stays behind other content */
+    background: #111; /* Dark background */
+}
+
 
 .timeline-content {
     background: #1a1a1a;
@@ -93,3 +104,6 @@ header {
     margin-left: 30px;
     color: white;
 }
+/* body {
+    background: url('https://www.transparenttextures.com/patterns/black-thread-light.png');
+} */

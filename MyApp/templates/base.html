@@ -5,13 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gopika TP | Portfolio</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+<!-- Font Awesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- ✅ Correct Tailwind Initialization -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="{% static 'js/script.js' %}" defer></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {},
+            },
+        };
+    </script>
+
+    <!-- ✅ Load CSS Correctly -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
 </head>
-{% block content %}
+
 <body class="dark-mode">
-    
+    {% block content %}
     <header class="p-5 flex justify-between items-center bg-gray-800 shadow-md">
         <h1 class="text-3xl font-bold">Gopika TP</h1>
         
@@ -26,13 +38,22 @@
         <button id="theme-toggle" class="button">Toggle Theme</button>
     </header>
 
+    <!-- ✅ Start Content Block -->
+    
     <main class="container mx-auto px-6 py-10">
- 
+        <h2 class="text-center text-4xl font-bold">Welcome to My Portfolio</h2>
+        <p class="text-center mt-4">I am a passionate developer exploring new technologies.</p>
     </main>
+    
+    <!-- ✅ End Content Block -->
 
     <footer class="bg-gray-800 text-center p-4 mt-10">
         <p>&copy; 2025 Gopika TP. All rights reserved.</p>
     </footer>
+    {% endblock %}
+    <!-- ✅ Load JavaScript at the End to Ensure Page Loads First -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="{% static 'assets/js/script.js' %}"></script>
+
 </body>
-{% endblock %}
 </html>
