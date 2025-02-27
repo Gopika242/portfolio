@@ -21,8 +21,8 @@ jobs:
     - name: Install dependencies
       run: npm install  # Remove this if you're not using npm
 
-    - name: Build project (if needed)
-      run: npm run build  # Remove or change this if no build step is needed
+    # - name: Build project (if needed)
+    #   run: npm run build  # Remove or change this if no build step is needed
 
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4
